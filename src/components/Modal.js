@@ -35,8 +35,8 @@ const Modal = ({ toggle }) => {
   return (
     <div className="h-screen w-full overflow-y-scroll">
       <div class="bg-white border h-full w-full  rounded-lg shadow relative ">
-        <div class="flex items-start justify-between p-5 border-b rounded-t w-full">
-          <h3 class="text-xl font-semibold lg:text-start text-center w-1/2">Add product</h3>
+        <div class="flex  items-center justify-between p-5 border-b rounded-t w-full">
+          <h3 class="text-xl font-semibold pl-10 w-1/2">Add product</h3>
           <button
             onClick={() => toggle(false)}
             type="button"

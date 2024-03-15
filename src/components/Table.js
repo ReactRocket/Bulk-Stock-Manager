@@ -88,14 +88,10 @@ const Table = () => {
       ) : (
         <section className="mx-auto h-screen w-full px-4 py-4">
           <div className="h-[10%]  flex lg:flex-row flex-col space-y-4   ">
-            <div className="lg:w-1/2 w-full pl-10 flex justify-center items-center flex-col">
+            <div className="lg:w-1/2 w-full  flex justify-start items-center flex-col pl-10">
               <h2 className="text-lg font-semibold lg:text-start text-center w-full ">
                 Products
               </h2>
-              <p className="lg:block  hidden mt-1 text-sm text-black">
-                This is a list of all Products. You can add new Products, edit
-                or delete existing ones.
-              </p>
             </div>
             <div className="lg:w-1/2 full flex justify-center items-center gap-3">
               <input
