@@ -1,7 +1,11 @@
 import React, { useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { login } from "../../redux/slices/authentication.slice";
+import {
+  loginInitialise,
+  loginSuccess,
+  loginError,
+} from "../../redux/slices/authentication.slice";
 import {
   CButton,
   CCard,
@@ -14,6 +18,7 @@ import {
   CInputGroup,
   CInputGroupText,
   CRow,
+  CSpinner,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { cilLockLocked, cilUser } from "@coreui/icons";
@@ -22,29 +27,42 @@ import { authenticateUser } from "../../apis/authService";
 const Login = () => {
   const navigate = useNavigate();
   const form = useRef();
-  const authentication = useSelector((state) => state.authenticateUser.value);
+  const data = useSelector((state) => state.authenticateUser.data);
+  const loading = useSelector((state) => state.authenticateUser.loading);
 
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch(loginInitialise());
     try {
       const result = await authenticateUser(
         form.current.username.value,
         form.current.password.value
       );
-      dispatch(login(result));
-      navigate("/dashboard");
+
+      if (result) {
+        dispatch(loginSuccess(result));
+        navigate("/dashboard");
+      } else {
+        dispatch(loginError());
+        form.current.reset()
+      form.current.username.focus()
+        
+      }
     } catch (error) {
-      alert("Couldn't login");
+      dispatch(loginError());
+      form.current.reset()
+      form.current.username.focus()
+
     }
   };
 
   useEffect(() => {
-    if (authentication || sessionStorage.getItem("authToken")) {
+    if (data || sessionStorage.getItem("authToken")) {
       navigate("/dashboard");
     }
-  }, [dispatch, navigate, authentication]);
+  }, [dispatch, navigate, data]);
 
   return (
     <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
@@ -84,9 +102,20 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton type="submit" color="primary" className="px-4">
-                          Login
-                        </CButton>
+                        {loading ? (
+                          <CButton color="primary" disabled>
+                            <CSpinner as="span" size="sm" aria-hidden="true" />{" "}
+                            Login
+                          </CButton>
+                        ) : (
+                          <CButton
+                            type="submit"
+                            color="primary"
+                            className="px-4"
+                          >
+                            Login
+                          </CButton>
+                        )}
                       </CCol>
                     </CRow>
                   </CForm>

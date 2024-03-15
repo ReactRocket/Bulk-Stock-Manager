@@ -12,7 +12,7 @@ const authenticateUser = async (username, password) => {
       return authToken;
     })
     .catch((error) => {
-     alert("Wrong username or password!")
+     console.log(error);
     });
 };
 
