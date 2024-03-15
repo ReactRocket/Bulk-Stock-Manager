@@ -12,9 +12,11 @@ import {
   searchProduct,
 } from "../apis/getProduct";
 import Modal from "./Modal";
+import BulkStockScreen from "./BulkStockScreen";
 
 const Table = () => {
   const [modalToggle, setModalToggle] = useState(false);
+  const [bulkToggle, setBulkToggle] = useState(false);
   const dispatch = useDispatch();
   const data = useSelector((state) => state.allProduct.data);
 
@@ -81,17 +83,21 @@ const Table = () => {
     <>
       {modalToggle ? (
         <Modal toggle={setModalToggle} />
+      ) : bulkToggle ? (
+        <BulkStockScreen toggle={setBulkToggle} />
       ) : (
         <section className="mx-auto h-screen w-full px-4 py-4">
-          <div className="h-[10%]  flex flex-col space-y-4  md:flex-row md:items-center md:justify-between md:space-y-0">
-            <div>
-              <h2 className="text-lg font-semibold">Products</h2>
-              <p className="mt-1 text-sm text-black">
+          <div className="h-[10%]  flex lg:flex-row flex-col space-y-4   ">
+            <div className="lg:w-1/2 w-full pl-10 flex justify-center items-center flex-col">
+              <h2 className="text-lg font-semibold lg:text-start text-center w-full ">
+                Products
+              </h2>
+              <p className="lg:block  hidden mt-1 text-sm text-black">
                 This is a list of all Products. You can add new Products, edit
                 or delete existing ones.
               </p>
             </div>
-            <div className="flex justify-center items-center gap-3">
+            <div className="lg:w-1/2 full flex justify-center items-center gap-3">
               <input
                 onChange={handleSearch}
                 class="flex h-10  rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
@@ -104,7 +110,14 @@ const Table = () => {
                 type="button"
                 className="rounded-md bg-sky-400 dark:bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-400/80 dark:hover:bg-sky-800/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
               >
-                Add Product
+                Add One
+              </button>
+              <button
+                onClick={() => setBulkToggle(true)}
+                type="button"
+                className="rounded-md bg-sky-400 dark:bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-400/80 dark:hover:bg-sky-800/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+              >
+                Add Bulk
               </button>
             </div>
           </div>
@@ -220,7 +233,6 @@ const Table = () => {
               </div>
             </div>
           </div>
-       
         </section>
       )}
     </>

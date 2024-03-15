@@ -50,7 +50,7 @@ const Login = () => {
   return (
     <>
       <div class="m-auto  h-screen  xl:container px-12 sm:px-0 mx-auto">
-        <div class="mx-auto h-full w-1/4 flex justify-center items-center">
+        <div class="mx-auto h-full lg:w-1/4 w-full flex justify-center items-center">
           <div class="m-auto  py-12 w-full ">
             <div class="mt-12 rounded-3xl border bg-gray-50 dark:border-gray-700 dark:bg-gray-800 -mx-6 sm:-mx-10 p-8 sm:p-10">
               <h3 class="text-2xl font-semibold text-gray-700 dark:text-white">

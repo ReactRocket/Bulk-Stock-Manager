@@ -33,10 +33,10 @@ const Modal = ({ toggle }) => {
   };
 
   return (
-    <div className="overflow-y-scroll h-full w-full">
+    <div className="h-screen w-full overflow-y-scroll">
       <div class="bg-white border h-full w-full  rounded-lg shadow relative ">
-        <div class="flex items-start justify-between p-5 border-b rounded-t">
-          <h3 class="text-xl font-semibold">Add product</h3>
+        <div class="flex items-start justify-between p-5 border-b rounded-t w-full">
+          <h3 class="text-xl font-semibold lg:text-start text-center w-1/2">Add product</h3>
           <button
             onClick={() => toggle(false)}
             type="button"
@@ -64,7 +64,7 @@ const Modal = ({ toggle }) => {
               <div class="col-span-6 sm:col-span-3">
                 <label
                   for="product-name"
-                  class="text-sm font-medium text-gray-900 block mb-2"
+                  class="text-sm  font-medium text-gray-900 block mb-2"
                 >
                   Product Name
                 </label>

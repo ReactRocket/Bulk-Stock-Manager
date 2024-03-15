@@ -6,6 +6,10 @@ const getAllProducts = () => {
   return axios.get("https://dummyjson.com/products");
 };
 
+const getProductCategorys = () => {
+  return axios.get("https://dummyjson.com/products/categories");
+};
+
 const deleteProduct = (id) => {
   return axios(`https://dummyjson.com/products/${id}`, {
     method: "DELETE",
@@ -23,4 +27,6 @@ const addProduct = (data) => {
   });
 };
 
-export { getAllProducts, deleteProduct, searchProduct ,addProduct};
+
+
+export { getAllProducts, deleteProduct, searchProduct ,addProduct,getProductCategorys};
